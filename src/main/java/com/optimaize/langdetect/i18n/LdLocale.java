@@ -17,9 +17,11 @@
 package com.optimaize.langdetect.i18n;
 
 import com.google.common.base.Optional;
-import com.google.common.base.Splitter;
+
+//import com.google.common.base.Splitter;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -90,7 +92,14 @@ public final class LdLocale {
         Optional<String> script = null;
         Optional<String> region = null;
 
-        List<String> strings = Splitter.on('-').splitToList(string);
+        //// CODE BY svc to replace guava-0.18 usage //////
+        //List<String> strings = Splitter.on('-').splitToList(string);
+        List<String> strings = new ArrayList<String>();
+        String[] stringParts = string.split("-");
+        for (String stringpart: stringParts){
+        	strings.add(stringpart);
+        }
+        //// End of CODE BY svc to replace guava-0.18 usage //////
         for (int i=0; i<strings.size(); i++) {
             String chunk = strings.get(i);
             if (i==0) {
